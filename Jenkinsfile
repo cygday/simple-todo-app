@@ -4,7 +4,7 @@ pipeline {
 		IMAGE_NAME = 'simple-todo:latest'
 	}
 
-	stage {
+	stages {
 		stage('checkout') {
 			steps {
 				git branch: 'main', url: 'https://github.com/cygday/simple-todo-app.git'
