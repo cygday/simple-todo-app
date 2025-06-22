@@ -1,0 +1,8 @@
+version: 'latest'
+
+services: 
+  simple-todo-app:
+    build: .
+    container_name: simple-todo-app:latest
+    ports:
+      - "5004:5004"
