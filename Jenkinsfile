@@ -29,14 +29,14 @@ pipeline {
 			steps {
 				sh "echo 'pushing image to docker hub'"
 				withCredentials([usernamePassword(
-					credentialsId:'to-do-app',
-					passwordVariable:'dockerhubpass',
-					usernameVariable:'dockerhubuser'
+					credentialsId:"to-do-app",
+					passwordVariable:"dockerhubpass",
+					usernameVariable:"dockerhubuser"
 					)]){
-				sh '''docker login -u ${env.dockerhubuser} -p ${dockerhubpass}'''
-				sh '''docker tag  simple-todo-app:latest ${env.dockerhubuser}/simple-todo-app:latest'''
-				sh '''docker push ${env.dockerhubuser}/simple-todo-app:latest'''
-				echo 'docker push success'
+				sh "docker login -u ${env.dockerhubuser} -p ${dockerhubpass}"
+				sh "docker tag  simple-todo-app:latest ${env.dockerhubuser}/simple-todo-app:latest"
+				sh "docker push ${env.dockerhubuser}/simple-todo-app:latest"
+				echo "docker push success"
 				}
 			}
 		}
