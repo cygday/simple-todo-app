@@ -27,7 +27,7 @@ pipeline {
 		}
 		stage('push to dockerhub') {
 			steps {
-				sh 'echo 'pushing image to docker hub''
+				sh "echo 'pushing image to docker hub'"
 				withCredentials([usernamePassword(
 					credentialsId:'to-do-app',
 					passwordVariable:'dockerhubpass',
