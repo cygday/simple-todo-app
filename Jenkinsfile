@@ -25,9 +25,24 @@ pipeline {
 				sh 'docker build -t $IMAGE_NAME:latest . '
 			}
 		}
-		stage('run container') {
+		stage('push to dockerhub') {
 			steps {
-				sh 'docker run -d -p 8090:80 --name todo-nginx $IMAGE_NAME:latest || true'
+				sh ' pushing image to docker hub'
+				withCredentials([usernamePassword(
+					credentialsId:'to-do-app',
+					passwordVariable:'dockerhubpass',
+					usernameVariable:'dockerhubuser'
+					)]){
+				sh 'docker login -u ${env.dockerhubuser} -p ${dockerhubpass}'
+				sh ' docker tag  simple-todo-app:latest ${env.dockerhubuser}/simple-todo-app:latest
+				sh 'docker push ${env.dockerhubuser}/simple-todo-app:latest'
+				echo 'docker push success'
+				}
+			}
+		}
+		stage('docker compose up') {
+			steps {
+				sh 'docker compose up --build -d'
 			}
 		}
 	}
