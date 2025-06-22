@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	environment {
-		IMAGE_NAME = 'simple-todo:v3'
+		IMAGE_NAME = 'simple-todo:latest'
 	}
 
 	stage {
@@ -22,12 +22,12 @@ pipeline {
 			
 		stage('Docker build') {
 			steps {
-				sh 'docker build -t $IMAGE_NAME . '
+				sh 'docker build -t $IMAGE_NAME:latest . '
 			}
 		}
 		stage('run container') {
 			steps {
-				sh 'docker run -d -p 8090:80 --name todo-nginx $IMAGE_NAME || true'
+				sh 'docker run -d -p 8090:80 --name todo-nginx $IMAGE_NAME:latest || true'
 			}
 		}
 	}
