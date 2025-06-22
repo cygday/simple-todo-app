@@ -42,6 +42,7 @@ pipeline {
 		}
 		stage('docker compose up') {
 			steps {
+				sh 'docker run --name simple-todo-app:latest simple-todo-app:latest'
 				sh 'docker compose up --build -d'
 			}
 		}
