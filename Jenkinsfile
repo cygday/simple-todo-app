@@ -15,10 +15,10 @@ pipeline {
 			steps {
 				withSonarQubeEnv('MySonarQube'){
 					sh 'sonar-scanner'
-					}
 				}
 			}
 		}
+		
 			
 		stage('Docker build') {
 			steps {
